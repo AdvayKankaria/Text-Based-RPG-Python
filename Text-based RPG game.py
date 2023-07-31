@@ -73,12 +73,44 @@ class NPC:
 class WizardNPC(NPC):
     def give_quest(self, player):
         print(f"\nHello, {player.name}! I am {self.name}, the wizard.")
-        print("I will grant you a powerful spell if you can bring me 3 magical crystals.")
-        print("Magical crystals can be found in the deeper parts of the forest, guarded by strong creatures.")
+        print("I have a crucial quest for you, should you choose to accept it.")
+        print("Deep within this forest lies a hidden treasure chest, filled with magical crystals of immense power.")
+        print("This treasure is guarded by fierce and cunning creatures, for it holds the key to ancient magic.")
+        print("Tell me, brave adventurer, what brings you to this perilous forest?")
+        
+        while True:
+            reason = input("Enter a reason for your quest (e.g., seeking power, saving a loved one, proving courage): ")
+            if len(reason.strip()) > 0:
+                break
+            else:
+                print("Please provide a valid reason for your quest.")
+        
+        print(f"\nAh, {reason}... A noble cause indeed!")
+        print("But be warned, the guardians of the chest are not to be underestimated.")
+        print("Prepare yourself for battles, and be mindful of your every step.")
+        print("Only the most resilient and determined adventurers have succeeded.")
 
-        if input("Do you accept the quest to find 3 magical crystals? (yes/no): ").lower() == 'yes':
-            player.quest = "crystals"
-            print("Good luck on your quest!")
+        while True:
+            response = input("Do you accept the quest to find the treasure chest and unlock its secrets? (y/n): ").lower()
+            if response == 'y':
+                player.quest = "treasure"
+                print(f"\nExcellent, {player.name}! Your bravery will be rewarded.")
+                print("To open the treasure you must have the key of ruby")
+                print("It will lead you to the location of the hidden treasure.")
+                print("May the magic of the forest guide your steps.")
+                print("Good luck on your quest!")
+                break
+            elif response == 'n':
+                print(f"{self.name} looks disappointed, but he understands. Maybe another time.")
+                break
+            else:
+                print("Invalid choice! Please answer with 'yes' or 'no'.")
+            
+        
+            
+
+
+
 
 class AlchemistNPC(NPC):
     def give_quest(self, player):
