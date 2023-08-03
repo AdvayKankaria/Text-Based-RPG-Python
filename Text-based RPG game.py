@@ -71,7 +71,7 @@ class NPC:
         pass
 
 class WizardNPC(NPC):
-    def give_quest(self, player):
+    def give_quest(self, player,Objects):
         print(f"\nHello, {player.name}! I am {self.name}, the wizard.")
         print("I have a crucial quest for you, should you choose to accept it.")
         print("Deep within this forest lies a hidden treasure chest, filled with magical crystals of immense power.")
@@ -99,7 +99,13 @@ class WizardNPC(NPC):
                 print("It will lead you to the location of the hidden treasure.")
                 print("May the magic of the forest guide your steps.")
                 print("Good luck on your quest!")
-                break
+                Objects.key(self,player)
+                if key == True:
+                    print("congrats you have the key for the treasure ..you have unlocked the secret treasure ")
+                    self.gold=+50
+                else:
+                    print("you dont have the key ....you got caught by the gaurdians")
+                    self.health = 0
             elif response == 'n':
                 print(f"{self.name} looks disappointed, but he understands. Maybe another time.")
                 break
@@ -121,6 +127,15 @@ class AlchemistNPC(NPC):
         if input("Do you accept the quest to find 5 sparkling mushrooms? (yes/no): ").lower() == 'yes':
             player.quest = "mushrooms"
             print("Best of luck on your quest!")
+
+class Objects(NPC):
+    def key(self,player):
+        if level == 2:
+             key = True
+    def mushroom(self,player):
+        if level == 3:
+            mushroom = True
+    
 
 def get_random_enemy(level):
     base_health = 30 + (level - 1) * 20
@@ -248,6 +263,12 @@ def main():
         # Task to obtain the spell
         if level == 3 and player.quest is None:
             wizard_npc.give_quest(player)
+            if player.is_alive():
+                print(f"\nCongratulations, {player.name} you have finished your quest!")
+                print("You are a hero of the forest!")
+            else:
+                print(f"\nGame over, {player.name}. Your journey ends here. Better luck next time!")
+                 
 
         # Task to obtain the potions
         if level == 4 and player.quest is None:
